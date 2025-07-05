@@ -31,7 +31,7 @@ class LoanRepaymentRepositoryImp @Inject constructor(private val dataManagerLoan
         loanId: Int,
         request: LoanRepaymentRequest,
     ): Observable<LoanRepaymentResponse> {
-        return submitPayment(loanId, request)
+        return dataManagerLoan.submitPayment(loanId, request)
     }
 
     override fun getDatabaseLoanRepaymentByLoanId(loanId: Int): Observable<LoanRepaymentRequest> {
