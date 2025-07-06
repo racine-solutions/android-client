@@ -280,7 +280,7 @@ private fun SavingsAccountTransactionContent(
                         val savingsAccountTransactionRequest = SavingsAccountTransactionRequest()
 
                         savingsAccountTransactionRequest.locale = "en"
-                        savingsAccountTransactionRequest.dateFormat = "dd MM yyyy"
+                        savingsAccountTransactionRequest.dateFormat = "dd MMMM yyyy"
                         savingsAccountTransactionRequest.transactionDate = SimpleDateFormat(
                             "dd MMMM yyyy",
                             Locale.getDefault(),
@@ -366,7 +366,7 @@ private fun SavingsAccountTransactionContent(
 
         MifosDatePickerTextField(
             value = SimpleDateFormat(
-                "dd-MMMM-yyyy",
+                "dd MMMM yyyy",
                 Locale.getDefault(),
             ).format(transactionDate),
             label = R.string.feature_savings_date,

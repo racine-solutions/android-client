@@ -347,7 +347,7 @@ private fun SavingsAccountSummaryContent(
                                 { approveSavings.invoke() }
                             }
 
-                            !savingsAccountWithAssociations.status?.active!! -> {
+                            savingsAccountWithAssociations.status?.active != true -> {
                                 { activateSavings.invoke() }
                             }
 
@@ -402,7 +402,7 @@ private fun TransactionItemRow(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    text = DateHelper.getDateAsString(transaction.date as List<Int>),
+                    text = DateHelper.getDateAsString(transaction.date as? List<Int> ?: emptyList()),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onBackground,
                     modifier = Modifier.weight(4f),
@@ -460,8 +460,8 @@ private fun SummaryDialogBox(
 
                 DialogBoxRowItem(
                     title = stringResource(id = R.string.feature_savings_date),
-                    value = DateHelper.getDateAsString(transaction.date as List<Int>),
-                )
+                    value = DateHelper.getDateAsString(transaction.date as? List<Int> ?: emptyList()),
+                    )
                 Spacer(modifier = Modifier.height(4.dp))
 
                 DialogBoxRowItem(
@@ -472,7 +472,7 @@ private fun SummaryDialogBox(
 
                 DialogBoxRowItem(
                     title = stringResource(id = R.string.feature_savings_running_balance),
-                    value = transaction.runningBalance.toString(),
+                    value = transaction.runningBalance?.toString() ?: "0.0",
                 )
                 Spacer(modifier = Modifier.height(4.dp))
 
@@ -561,7 +561,7 @@ private fun getSavingsButtonText(context: Context, status: Status?): String {
             context.resources.getString(R.string.feature_savings_approve_savings)
         }
 
-        !status?.active!! -> {
+        status?.active != true -> {
             context.resources.getString(R.string.feature_savings_activate_savings)
         }
 
@@ -581,7 +581,7 @@ private fun savingsButtonVisibilityStatus(status: Status?): Boolean {
             true
         }
 
-        !status?.active!! -> {
+        status?.active != true -> {
             true
         }
 
@@ -601,7 +601,7 @@ private fun depositAndWithdrawButtonVisibility(status: Status?): Boolean {
             false
         }
 
-        !status?.active!! -> {
+        status?.active != true -> {
             false
         }
 
@@ -643,7 +643,7 @@ class SavingsAccountSummaryScreenPreviewProvider :
             SavingsAccountSummaryUiState.ShowSavingAccount(
                 SavingsAccountWithAssociations(
                     clientId = 343434343,
-                    accountNo = 3830948,
+                    accountNo = "3830948",
                     clientName = "Pronay",
                     transactions = listOf(
                         transaction,

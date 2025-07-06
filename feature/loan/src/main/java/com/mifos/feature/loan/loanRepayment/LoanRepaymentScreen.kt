@@ -483,7 +483,7 @@ private fun ShowLoanRepaymentConfirmationDialog(
 
                         request.accountNumber = loanAccountNumber
                         request.paymentTypeId = paymentTypeId
-                        request.dateFormat = "dd MM yyyy"
+                        request.dateFormat = "dd MMMM yyyy"
                         request.locale = "en"
                         request.transactionAmount = total
                         request.transactionDate = SimpleDateFormat(
