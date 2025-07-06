@@ -45,7 +45,7 @@ class SavingsAccountTransactionViewModel @Inject constructor(
     private val savingsTransactionData: SavingsTransactionData = Gson().fromJson(arg.value, SavingsTransactionData::class.java)
 
     val accountId = savingsTransactionData.savingsAccountWithAssociations.id
-    val savingsAccountNumber = savingsTransactionData.savingsAccountWithAssociations.accountNo
+    val savingsAccountNumber = savingsTransactionData.savingsAccountWithAssociations.id
     val clientName = savingsTransactionData.savingsAccountWithAssociations.clientName
     val transactionType = savingsTransactionData.transactionType
     private val savingsAccountType = savingsTransactionData.depositType
