@@ -528,5 +528,8 @@
     <string name="client_identifier_document_not_found">Document not found</string>
     <string name="client_identifier_btn_update">Update</string>
     <string name="client_update_document_title">Update Document</string>
+    <!-- Screen Title -->
+    <string name="title_new_fixed_deposit_account">New Fixed Deposit Account</string>
 
+  
 </resources>
