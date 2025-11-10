@@ -436,7 +436,13 @@ fun MifosOutlinedTextField(
         shape = shape,
         colors = colors,
         value = value,
-        label = { Text(text = label) },
+        label = {
+            Text(
+                text = label,
+                maxLines = 1,
+                softWrap = true,
+            )
+        },
         onValueChange = onValueChange,
         textStyle = textStyle,
         modifier = modifier.fillMaxWidth(),
@@ -448,6 +454,7 @@ fun MifosOutlinedTextField(
         interactionSource = interactionSource,
         singleLine = config.singleLine,
         maxLines = config.maxLines,
+        prefix = config.prefix,
         minLines = config.minLines,
         leadingIcon = config.leadingIcon,
         isError = config.isError,
@@ -494,6 +501,7 @@ data class MifosTextFieldConfig(
     val keyboardOptions: KeyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
     val trailingIcon: @Composable (() -> Unit)? = null,
     val leadingIcon: @Composable (() -> Unit)? = null,
+    val prefix: @Composable (() -> Unit)? = null,
 )
 
 @Preview
