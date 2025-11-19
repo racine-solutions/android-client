@@ -22,7 +22,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.mifos.core.designsystem.component.MifosScaffold
 import com.mifos.core.ui.components.MifosBreadcrumbNavBar
@@ -79,7 +78,8 @@ private fun FixedDepositAccountScaffold(
             },
             Step(name = stringResource(Res.string.step_terms)) {
                 TermsPage(
-                    onNext = { onAction(NewFixedDepositAccountAction.OnNextPress) },
+                    state = newFixedDepositAccountState,
+                    onAction = onAction,
                 )
             },
 
@@ -132,10 +132,9 @@ private fun FixedDepositAccountScaffold(
                         modifier = Modifier
                             .fillMaxWidth(),
 
-                        )
+                    )
                 }
             }
         }
-
     }
 }
