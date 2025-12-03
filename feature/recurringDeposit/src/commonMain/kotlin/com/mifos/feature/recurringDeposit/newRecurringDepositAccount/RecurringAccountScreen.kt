@@ -81,7 +81,8 @@ private fun RecurringAccountScaffold(
         },
         Step(name = stringResource(Res.string.feature_recurring_deposit_step_terms)) {
             TermsPage(
-                onNext = { onAction(RecurringAccountAction.OnNextPress) },
+                state = state,
+                onAction = onAction,
             )
         },
         Step(name = stringResource(Res.string.feature_recurring_deposit_step_settings)) {
