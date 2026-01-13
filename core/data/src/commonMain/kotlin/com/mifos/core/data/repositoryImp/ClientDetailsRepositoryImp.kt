@@ -94,7 +94,17 @@ class ClientDetailsRepositoryImp(
     }
 
     override suspend fun getClient(clientId: Int): ClientEntity {
-        return dataManagerClient.getClient(clientId)
+        val client = dataManagerClient.getClient(clientId)
+
+        if (client.groupName.isNullOrBlank() && !client.groups.isNullOrEmpty()) {
+            client.groups?.firstOrNull()?.let { firstGroup ->
+                return client.copy(
+                    groupName = firstGroup.name,
+                    groupId = firstGroup.id,
+                )
+            }
+        }
+        return client
     }
 
     override fun getImage(clientId: Int): Flow<DataState<String>> {
