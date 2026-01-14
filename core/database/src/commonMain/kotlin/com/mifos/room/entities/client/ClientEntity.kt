@@ -100,6 +100,8 @@ data class ClientEntity(
 
     val fullname: String? = null,
 
+    val savingsAccountId: Long? = null,
+
     val imageId: Int = 0,
 
     val imagePresent: Boolean = false,
