@@ -143,6 +143,9 @@ internal class LoanAccountProfileViewModel(
                     it.copy(dialogState = LoanAccountState.DialogState.Error(Res.string.feature_loan_profile_error_details_not_found))
                 }
             }
+            LoanAccountAction.Refresh -> if (stateFlow.value.networkConnection) {
+                loadLoanAccountDetails(route.loanId)
+            }
             LoanAccountAction.OnNextActionClick -> handleNextAction()
             is LoanAccountAction.OnDetailItemClick -> sendEvent(LoanAccountEvent.NavigateToDetail(action.item))
             LoanAccountAction.OnAccountClick -> sendEvent(LoanAccountEvent.NavigateToAccountDetails)
@@ -216,6 +219,7 @@ sealed interface LoanAccountEvent {
 sealed interface LoanAccountAction {
     data object NavigateBack : LoanAccountAction
     data object OnRetry : LoanAccountAction
+    data object Refresh : LoanAccountAction
     data object OnNextActionClick : LoanAccountAction
     data class OnDetailItemClick(val item: LoanAccountProfileActionItem) : LoanAccountAction
     data object OnAccountClick : LoanAccountAction

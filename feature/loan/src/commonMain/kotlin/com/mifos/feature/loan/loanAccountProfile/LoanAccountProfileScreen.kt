@@ -46,6 +46,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.mifos.core.common.utils.CurrencyFormatter
@@ -92,6 +93,13 @@ internal fun LoanAccountProfileScreen(
     viewModel: LoanAccountProfileViewModel = koinViewModel(),
 ) {
     val state by viewModel.stateFlow.collectAsStateWithLifecycle()
+
+    LifecycleResumeEffect(Unit) {
+        if (state.loanAccount != null) {
+            viewModel.trySendAction(LoanAccountAction.Refresh)
+        }
+        onPauseOrDispose { }
+    }
 
     EventsEffect(viewModel.eventFlow) { event ->
         when (event) {
