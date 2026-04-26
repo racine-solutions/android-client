@@ -33,7 +33,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -51,7 +50,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.mifos.core.common.utils.DateHelper
+import com.mifos.core.common.utils.ApiDateFormatter
 import com.mifos.core.designsystem.component.MifosDatePickerTextField
 import com.mifos.core.designsystem.component.MifosOutlinedTextField
 import com.mifos.core.designsystem.component.MifosScaffold
@@ -174,11 +173,6 @@ private fun LoanAccountDisbursementContent(
     }
     val datePickerState = rememberDatePickerState(
         initialSelectedDateMillis = disbursementDate,
-        selectableDates = object : SelectableDates {
-            override fun isSelectableDate(utcTimeMillis: Long): Boolean {
-                return utcTimeMillis >= Clock.System.now().toEpochMilliseconds()
-            }
-        },
     )
     val scrollState = rememberScrollState()
 
@@ -217,9 +211,7 @@ private fun LoanAccountDisbursementContent(
         Spacer(modifier = Modifier.height(KptTheme.spacing.md))
 
         MifosDatePickerTextField(
-            value = DateHelper.getDateAsStringFromLong(
-                disbursementDate,
-            ),
+            value = ApiDateFormatter.formatForApi(disbursementDate),
             label = stringResource(Res.string.feature_loan_approval_disbursement_date),
             openDatePicker = {
                 showDatePickerDialog = true
@@ -268,12 +260,10 @@ private fun LoanAccountDisbursementContent(
                 .heightIn(DesignToken.spacing.dp44),
             onClick = {
                 if (isFieldValid(amount = amount)) {
-                    val date = DateHelper.getDateAsStringFromLong(
-                        disbursementDate,
-                    )
+                    val date = ApiDateFormatter.formatForApi(disbursementDate)
                     val loanDisbursement = LoanDisbursement(
                         note = note,
-                        paymentId = paymentTypeId,
+                        paymentTypeId = paymentTypeId.takeIf { it != 0 },
                         actualDisbursementDate = date,
                         transactionAmount = amount.toDouble(),
                     )

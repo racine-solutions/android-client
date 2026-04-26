@@ -168,10 +168,12 @@
     <string name="feature_loan_profile_status_pending">Pending</string>
     <string name="feature_loan_profile_status_overpaid">Overpaid</string>
     <string name="feature_loan_profile_status_unknown">Unknown</string>
+    <string name="feature_loan_profile_status_approved">Approved</string>
     <string name="feature_loan_profile_action_approve">Approve Account</string>
     <string name="feature_loan_profile_action_repayment">Make Repayment</string>
     <string name="feature_loan_profile_action_transfer">Transfer Funds</string>
     <string name="feature_loan_profile_action_view">View Action</string>
+    <string name="feature_loan_profile_action_disburse">Disburse Loan</string>
     <string name="feature_loan_profile_section_actions_details">ACTIONS &amp; DETAILS</string>
     <string name="feature_loan_profile_section_account_overview">ACCOUNT OVERVIEW</string>
     <string name="feature_loan_profile_label_balance">Current Balance</string>

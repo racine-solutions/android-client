@@ -258,4 +258,5 @@ object AppColors {
     val loanPendingStatus = Color(0xFFFFA500)
     val loanOverpaidStatus = Color(0xFF800080)
     val loanUnknownStatus = Color(0xFF9E9E9E)
+    val loanWaitingForDisbursalStatus = Color(0xFF2196F3)
 }
