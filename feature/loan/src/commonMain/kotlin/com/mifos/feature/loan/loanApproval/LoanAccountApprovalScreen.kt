@@ -303,13 +303,7 @@ private fun LoanAccountApprovalContent(
                             expectedDisbursementDate = disbursementDate,
                         ),
                     )
-//                    } else {
-//                        Toast.makeText(
-//                            context,
-//                            context.resources.getString(R.string.feature_loan_error_not_connected_internet),
-//                            Toast.LENGTH_SHORT,
-//                        ).show()
-//                    }
+
                 }
             },
         ) {
