@@ -69,6 +69,8 @@ import template.core.base.designsystem.theme.KptTheme
  * Created by Aditya Gupta on 11/02/24.
  */
 
+private const val SHOW_SERVER_CONFIG_BUTTON = false
+
 @Composable
 internal fun LoginScreen(
     passcodeIntent: () -> Unit,
@@ -130,29 +132,31 @@ internal fun LoginScreen(
         containerColor = KptTheme.colorScheme.surface,
         snackbarHost = { SnackbarHost(snackbarHostState) },
         bottomBar = {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(DesignToken.padding.medium),
-                contentAlignment = Alignment.Center,
-            ) {
-                FilledTonalButton(
-                    onClick = onClickToUpdateServerConfig,
+            if (SHOW_SERVER_CONFIG_BUTTON) {
+                Box(
                     modifier = Modifier
-                        .align(Alignment.Center),
-                    colors = ButtonDefaults.filledTonalButtonColors(
-                        containerColor = KptTheme.colorScheme.tertiaryContainer,
-                        contentColor = KptTheme.colorScheme.tertiary,
-                    ),
+                        .fillMaxWidth()
+                        .padding(DesignToken.padding.medium),
+                    contentAlignment = Alignment.Center,
                 ) {
-                    Text(text = "Update Server Configuration")
+                    FilledTonalButton(
+                        onClick = onClickToUpdateServerConfig,
+                        modifier = Modifier
+                            .align(Alignment.Center),
+                        colors = ButtonDefaults.filledTonalButtonColors(
+                            containerColor = KptTheme.colorScheme.tertiaryContainer,
+                            contentColor = KptTheme.colorScheme.tertiary,
+                        ),
+                    ) {
+                        Text(text = "Update Server Configuration")
 
-                    Spacer(modifier = Modifier.width(KptTheme.spacing.xs))
+                        Spacer(modifier = Modifier.width(KptTheme.spacing.xs))
 
-                    Icon(
-                        imageVector = MifosIcons.ArrowForward,
-                        contentDescription = "ArrowForward",
-                    )
+                        Icon(
+                            imageVector = MifosIcons.ArrowForward,
+                            contentDescription = "ArrowForward",
+                        )
+                    }
                 }
             }
         },

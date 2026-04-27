@@ -35,7 +35,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -51,7 +50,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.mifos.core.common.utils.DateHelper
+import com.mifos.core.common.utils.ApiDateFormatter
 import com.mifos.core.designsystem.component.MifosDatePickerTextField
 import com.mifos.core.designsystem.component.MifosOutlinedTextField
 import com.mifos.core.designsystem.component.MifosScaffold
@@ -184,27 +183,15 @@ private fun LoanAccountApprovalContent(
 
     val approveDatePickerState = rememberDatePickerState(
         initialSelectedDateMillis = approveDate,
-        selectableDates = object : SelectableDates {
-            override fun isSelectableDate(utcTimeMillis: Long): Boolean {
-                return utcTimeMillis >= Clock.System.now().toEpochMilliseconds()
-            }
-        },
     )
     val disburseDatePickerState = rememberDatePickerState(
         initialSelectedDateMillis = currentDisburseDate,
-        selectableDates = object : SelectableDates {
-            override fun isSelectableDate(utcTimeMillis: Long): Boolean {
-                return utcTimeMillis >= Clock.System.now().toEpochMilliseconds()
-            }
-        },
     )
     var disbursementDate by rememberSaveable {
         mutableStateOf(
             loanWithAssociations
                 ?.timeline!!.expectedDisbursementDate?.let {
-                DateHelper.getDateAsString(
-                    it,
-                )
+                ApiDateFormatter.formatFromList(it)
             },
         )
     }
@@ -224,9 +211,7 @@ private fun LoanAccountApprovalContent(
                             }
                         } else {
                             disburseDatePickerState.selectedDateMillis?.let {
-                                disbursementDate = DateHelper.getDateAsStringFromLong(
-                                    it,
-                                )
+                                disbursementDate = ApiDateFormatter.formatForApi(it)
                             }
                         }
                         pickApproveDate = false
@@ -255,9 +240,7 @@ private fun LoanAccountApprovalContent(
         Spacer(modifier = Modifier.height(KptTheme.spacing.md))
 
         MifosDatePickerTextField(
-            value = DateHelper.getDateAsStringFromLong(
-                approveDate,
-            ),
+            value = ApiDateFormatter.formatForApi(approveDate),
             label = stringResource(Res.string.feature_loan_approved_on),
             openDatePicker = {
                 pickApproveDate = true
@@ -310,9 +293,7 @@ private fun LoanAccountApprovalContent(
                 if (isFieldValid(amount = approvedAmount) &&
                     isFieldValid(amount = transactionAmount)
                 ) {
-                    val approvedOnDate = DateHelper.getDateAsStringFromLong(
-                        approveDate,
-                    )
+                    val approvedOnDate = ApiDateFormatter.formatForApi(approveDate)
 
                     onLoanApprove.invoke(
                         LoanApproval(
@@ -322,13 +303,7 @@ private fun LoanAccountApprovalContent(
                             expectedDisbursementDate = disbursementDate,
                         ),
                     )
-//                    } else {
-//                        Toast.makeText(
-//                            context,
-//                            context.resources.getString(R.string.feature_loan_error_not_connected_internet),
-//                            Toast.LENGTH_SHORT,
-//                        ).show()
-//                    }
+
                 }
             },
         ) {

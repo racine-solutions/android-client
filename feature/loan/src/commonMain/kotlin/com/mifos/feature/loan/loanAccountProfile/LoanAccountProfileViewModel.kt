@@ -11,6 +11,7 @@ package com.mifos.feature.loan.loanAccountProfile
 
 import androidclient.feature.loan.generated.resources.Res
 import androidclient.feature.loan.generated.resources.feature_loan_profile_action_approve
+import androidclient.feature.loan.generated.resources.feature_loan_profile_action_disburse
 import androidclient.feature.loan.generated.resources.feature_loan_profile_action_repayment
 import androidclient.feature.loan.generated.resources.feature_loan_profile_action_transfer
 import androidclient.feature.loan.generated.resources.feature_loan_profile_action_view
@@ -18,6 +19,7 @@ import androidclient.feature.loan.generated.resources.feature_loan_profile_error
 import androidclient.feature.loan.generated.resources.feature_loan_profile_error_network_not_available
 import androidclient.feature.loan.generated.resources.feature_loan_profile_failed_to_load_loan
 import androidclient.feature.loan.generated.resources.feature_loan_profile_status_active
+import androidclient.feature.loan.generated.resources.feature_loan_profile_status_approved
 import androidclient.feature.loan.generated.resources.feature_loan_profile_status_overpaid
 import androidclient.feature.loan.generated.resources.feature_loan_profile_status_pending
 import androidclient.feature.loan.generated.resources.feature_loan_profile_status_unknown
@@ -114,6 +116,7 @@ internal class LoanAccountProfileViewModel(
     private fun calculateNextActionResource(status: LoanProfileStatus): StringResource {
         return when (status) {
             LoanProfileStatus.PENDING -> Res.string.feature_loan_profile_action_approve
+            LoanProfileStatus.APPROVED -> Res.string.feature_loan_profile_action_disburse
             LoanProfileStatus.OVERPAID -> Res.string.feature_loan_profile_action_transfer
             LoanProfileStatus.ACTIVE -> Res.string.feature_loan_profile_action_repayment
             LoanProfileStatus.UNKNOWN -> Res.string.feature_loan_profile_action_view
@@ -124,6 +127,7 @@ internal class LoanAccountProfileViewModel(
         return when (status) {
             LoanProfileStatus.ACTIVE -> LoanStatusUiModel(Res.string.feature_loan_profile_status_active, AppColors.loanActiveStatus)
             LoanProfileStatus.PENDING -> LoanStatusUiModel(Res.string.feature_loan_profile_status_pending, AppColors.loanPendingStatus)
+            LoanProfileStatus.APPROVED -> LoanStatusUiModel(Res.string.feature_loan_profile_status_approved, AppColors.loanWaitingForDisbursalStatus)
             LoanProfileStatus.OVERPAID -> LoanStatusUiModel(Res.string.feature_loan_profile_status_overpaid, AppColors.loanOverpaidStatus)
             LoanProfileStatus.UNKNOWN -> LoanStatusUiModel(Res.string.feature_loan_profile_status_unknown, AppColors.loanUnknownStatus)
         }
@@ -139,6 +143,9 @@ internal class LoanAccountProfileViewModel(
                     it.copy(dialogState = LoanAccountState.DialogState.Error(Res.string.feature_loan_profile_error_details_not_found))
                 }
             }
+            LoanAccountAction.Refresh -> if (stateFlow.value.networkConnection) {
+                loadLoanAccountDetails(route.loanId)
+            }
             LoanAccountAction.OnNextActionClick -> handleNextAction()
             is LoanAccountAction.OnDetailItemClick -> sendEvent(LoanAccountEvent.NavigateToDetail(action.item))
             LoanAccountAction.OnAccountClick -> sendEvent(LoanAccountEvent.NavigateToAccountDetails)
@@ -150,6 +157,7 @@ internal class LoanAccountProfileViewModel(
 
         when (account.status.toProfileStatus()) {
             LoanProfileStatus.PENDING -> sendEvent(LoanAccountEvent.NavigateToAction(LoanProfileAction.Approve))
+            LoanProfileStatus.APPROVED -> sendEvent(LoanAccountEvent.NavigateToAction(LoanProfileAction.Disburse))
             LoanProfileStatus.OVERPAID -> sendEvent(LoanAccountEvent.NavigateToAction(LoanProfileAction.Transfer))
             LoanProfileStatus.ACTIVE -> sendEvent(LoanAccountEvent.NavigateToAction(LoanProfileAction.Repayment))
             LoanProfileStatus.UNKNOWN -> sendEvent(LoanAccountEvent.NavigateToAccountDetails)
@@ -160,6 +168,7 @@ internal class LoanAccountProfileViewModel(
         if (this == null) return LoanProfileStatus.UNKNOWN
         return when {
             this.pendingApproval == true -> LoanProfileStatus.PENDING
+            this.waitingForDisbursal == true -> LoanProfileStatus.APPROVED
             this.overpaid == true -> LoanProfileStatus.OVERPAID
             this.active == true -> LoanProfileStatus.ACTIVE
             else -> LoanProfileStatus.UNKNOWN
@@ -170,6 +179,7 @@ internal class LoanAccountProfileViewModel(
 enum class LoanProfileStatus {
     ACTIVE,
     PENDING,
+    APPROVED,
     OVERPAID,
     UNKNOWN,
 }
@@ -194,6 +204,7 @@ data class LoanStatusUiModel(
 
 sealed interface LoanProfileAction {
     data object Approve : LoanProfileAction
+    data object Disburse : LoanProfileAction
     data object Repayment : LoanProfileAction
     data object Transfer : LoanProfileAction
 }
@@ -208,6 +219,7 @@ sealed interface LoanAccountEvent {
 sealed interface LoanAccountAction {
     data object NavigateBack : LoanAccountAction
     data object OnRetry : LoanAccountAction
+    data object Refresh : LoanAccountAction
     data object OnNextActionClick : LoanAccountAction
     data class OnDetailItemClick(val item: LoanAccountProfileActionItem) : LoanAccountAction
     data object OnAccountClick : LoanAccountAction

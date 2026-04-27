@@ -12,18 +12,25 @@ package com.mifos.core.model.objects.account.loan
 import com.mifos.core.model.utils.DateConstants
 import com.mifos.core.model.utils.Parcelable
 import com.mifos.core.model.utils.Parcelize
+import kotlinx.serialization.EncodeDefault
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.Serializable
 
 @Parcelize
-data class LoanDisbursement(
+@Serializable
+@OptIn(ExperimentalSerializationApi::class)
+class LoanDisbursement(
     var actualDisbursementDate: String? = null,
 
     var note: String? = null,
 
     var transactionAmount: Double? = null,
 
-    var paymentId: Int? = null,
+    var paymentTypeId: Int? = null,
 
-    var locale: String? = DateConstants.LOCALE,
+    @EncodeDefault
+    var locale: String = DateConstants.LOCALE,
 
-    var dateFormat: String? = DateConstants.DATE_FORMAT,
+    @EncodeDefault
+    var dateFormat: String = DateConstants.DATE_FORMAT,
 ) : Parcelable

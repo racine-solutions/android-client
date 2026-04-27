@@ -46,6 +46,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.mifos.core.common.utils.CurrencyFormatter
@@ -78,6 +79,7 @@ import template.core.base.designsystem.theme.KptTheme
 internal fun LoanAccountProfileScreen(
     onNavigateBack: () -> Unit,
     approveLoan: (Int, LoanWithAssociationsEntity) -> Unit,
+    disburseLoan: (Int) -> Unit,
     onRepaymentClick: (LoanWithAssociationsEntity) -> Unit,
     navigateToRepaymentSchedule: (Int) -> Unit,
     navigateToTransactions: (Int) -> Unit,
@@ -92,6 +94,13 @@ internal fun LoanAccountProfileScreen(
 ) {
     val state by viewModel.stateFlow.collectAsStateWithLifecycle()
 
+    LifecycleResumeEffect(Unit) {
+        if (state.loanAccount != null) {
+            viewModel.trySendAction(LoanAccountAction.Refresh)
+        }
+        onPauseOrDispose { }
+    }
+
     EventsEffect(viewModel.eventFlow) { event ->
         when (event) {
             LoanAccountEvent.NavigateBack -> onNavigateBack.invoke()
@@ -100,6 +109,7 @@ internal fun LoanAccountProfileScreen(
 
                 when (event.action) {
                     LoanProfileAction.Approve -> approveLoan(account.id, account)
+                    LoanProfileAction.Disburse -> disburseLoan(account.id)
                     LoanProfileAction.Repayment -> onRepaymentClick(account)
                     LoanProfileAction.Transfer -> {
                         val account = state.loanAccount ?: return@EventsEffect
