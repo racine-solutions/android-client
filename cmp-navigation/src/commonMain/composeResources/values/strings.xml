@@ -11,7 +11,7 @@
 <resources>
     <string name="cmp_navigation_no_internet">You are not connected to the Internet!</string>
 
-    <string name="cmp_navigation_mifos">Mifos</string>
+    <string name="cmp_navigation_mifos">Racine</string>
     <string name="cmp_navigation_search">Search</string>
     <string name="cmp_navigation_clients">Clients</string>
     <string name="cmp_navigation_center">Centers</string>
