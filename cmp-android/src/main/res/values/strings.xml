@@ -11,8 +11,8 @@
 <resources>
 
     <!-- General Terms Begin Here -->
-    <string name="app_name">MifosXDroid</string>
-    <string name="mifos_account">Mifos Account</string>
+    <string name="app_name">RacinePay</string>
+    <string name="mifos_account">Racine Account</string>
     <string name="enter_credentials"><b>Please enter your credentials.</b></string>
     <string name="datatables">DataTable</string>
     <string name="associated_datatables">Associated Datatables</string>
@@ -40,10 +40,10 @@
     <string name="amount">Amount</string>
     <string name="date_colon">Date:</string>
     <string name="payment_type">Payment Type</string>
-    <string name="mifos_instance_domain">Mifos Instance Domain</string>
+    <string name="mifos_instance_domain">Racine Instance Domain</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="mifos" translatable="false">Mifos</string>
+    <string name="mifos" translatable="false">Racine</string>
     <string name="full_name">Name</string>
     <string name="external_id">External ID</string>
     <string name="loanproduct">Loan Product</string>
@@ -149,7 +149,7 @@
     <string name="savings_account_submitted_for_approval">The Savings Account has been submitted for
         Approval</string>
     <string name="package_name">Package Name</string>
-    <string name="document_directory" translatable="false">/mifos/documents/</string>
+    <string name="document_directory" translatable="false">/racine/documents/</string>
     <string name="open_document">Open Document</string>
     <string name="document_remove_successfully">Document Removed Successfully</string>
     <string name="document_fetch_successfully">Document Fetch Successfully</string>
@@ -182,7 +182,7 @@
     <string name="address_updated_successfully">Address Updated Successfully</string>
     <string name="google_play_services_not_available">Google Play Services is not available.</string>
     <string name="empty_client_address">Empty Address List</string>
-    <string name="mifos_path_tracker">Mifos Path Tracker</string>
+    <string name="mifos_path_tracker">Racine Path Tracker</string>
     <string name="description_location_tracking">Location tracking starts now</string>
     <string name="stop_tracking">Stop Tracking</string>
     <string name="start_tracking">Start Tracking</string>
@@ -219,7 +219,7 @@
     <string name="reset">Reset</string>
     <string name="from_gallery">From Gallery</string>
     <string name="sign_uploaded_success_msg">Signature uploaded successfully!</string>
-    <string name="signature_image_directory" translatable="false">/mifos/documents/sign/</string>
+    <string name="signature_image_directory" translatable="false">/racine/documents/sign/</string>
     <string name="sign_dir_not_created_msg">Something went wrong. Couldn\'t create directory.</string>
     <string name="sign_saved_success_msg">File saved successfully in </string>
     <string name="uploading_sign_msg">Uploading signature %#8230</string>
@@ -274,7 +274,7 @@
     <string name="obligation_date_type">Obligation date type</string>
     <string name="start_date">Start Date</string>
     <string name="end_date">End Date</string>
-    <string name="export_csv_directory" translatable="false">/mifos/documents/report/</string>
+    <string name="export_csv_directory" translatable="false">/racine/documents/report/</string>
     <string name="enter_account_no">Enter Account No.</string>
     <string name="from_x_number">From X Number</string>
     <string name="to_y_number">To Y Number</string>
@@ -893,7 +893,7 @@
     <string name="about_app">Field Officer Application is an application
         developed for the Bank staff field officer to keep track of Clients,
         Centers, Groups, Loan Account, Savings Account, etc.</string>
-    <string name="about_mifos">Developed by Mifos contributors</string>
+    <string name="about_mifos">Developed by Racine Solutions Limited</string>
     <string name="about_us_connect">Connect With Us</string>
     <string name="link">Visit Us</string>
     <string name="about_support_github_sub">Fork the repo and push changes or submit new issues.</string>

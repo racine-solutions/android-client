@@ -13,6 +13,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -25,6 +26,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.mifos.core.designsystem.component.MifosCard
 import com.mifos.core.designsystem.icon.MifosIcons
 import com.mifos.core.designsystem.theme.AppColors
@@ -58,7 +60,8 @@ fun MifosTopAppBar(
                 ) {
                     Image(
                         painter = painterResource(org.mifos.navigation.generated.resources.Res.drawable.topbarlogo),
-                        contentDescription = "Mifos Logo",
+                        contentDescription = "Racine Logo",
+                        modifier = Modifier.size(28.dp),
                     )
                     Spacer(Modifier.width(DesignToken.spacing.mediumSmall))
                     Text(

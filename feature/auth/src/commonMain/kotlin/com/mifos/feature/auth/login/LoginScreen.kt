@@ -11,7 +11,7 @@ package com.mifos.feature.auth.login
 
 import androidclient.feature.auth.generated.resources.Res
 import androidclient.feature.auth.generated.resources.feature_auth_enter_credentials
-import androidclient.feature.auth.generated.resources.feature_auth_mifos_logo
+import androidclient.feature.auth.generated.resources.feature_auth_racine_logo
 import androidclient.feature.auth.generated.resources.feature_auth_password
 import androidclient.feature.auth.generated.resources.feature_auth_username
 import androidx.compose.foundation.layout.Box
@@ -171,7 +171,7 @@ internal fun LoginScreen(
         ) {
             Spacer(modifier = Modifier.height(DesignToken.spacing.dp80))
 
-            MifosAndroidClientIcon(imageVector = painterResource(Res.drawable.feature_auth_mifos_logo))
+            MifosAndroidClientIcon(imageVector = painterResource(Res.drawable.feature_auth_racine_logo))
 
             Text(
                 modifier = Modifier

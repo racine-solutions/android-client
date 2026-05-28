@@ -30,7 +30,7 @@
     <string name="amount">Amount</string>
     <string name="date">Date</string>
     <string name="payment_type">Payment Type</string>
-    <string name="mifos_instance_domain">Mifos Instance Domain</string>
+    <string name="mifos_instance_domain">Racine Instance Domain</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="full_name">Name</string>
@@ -181,7 +181,7 @@
     <string name="menu_remove_photo">Remove photo</string>
     <string name="menu_take_photo">Take new photo</string>
     <string name="toast_welcome">Welcome</string>
-    <string name="app_name">MifosXDroid</string>
+    <string name="app_name">RacinePay</string>
     <string name="client_image_updated">Client image updated</string>
     <string name="failed_to_capture_image">Failed to capture image</string>
     <string name="new_text">New Text</string>
