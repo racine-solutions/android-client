@@ -69,7 +69,7 @@ import template.core.base.designsystem.theme.KptTheme
  * Created by Aditya Gupta on 11/02/24.
  */
 
-private const val SHOW_SERVER_CONFIG_BUTTON = false
+private const val SHOW_SERVER_CONFIG_BUTTON = true
 
 @Composable
 internal fun LoginScreen(

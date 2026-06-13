@@ -28,10 +28,10 @@ data class ServerConfig(
     companion object {
         val DEFAULT = ServerConfig(
             protocol = "https://",
-            endPoint = "lms-backenddev.racinesolutions.com",
+            endPoint = "payments.racinesolutions.com",
             apiPath = "/fineract-provider/api/v1/",
             port = "80",
-            tenant = "default",
+            tenant = "",
         )
 
         val LOCALHOST = ServerConfig(
@@ -39,7 +39,7 @@ data class ServerConfig(
             endPoint = "localhost",
             apiPath = "/fineract-provider/api/v1/",
             port = "8080",
-            tenant = "default",
+            tenant = "",
         )
     }
 }

@@ -21,8 +21,8 @@ data class AppSettings(
 ) {
     companion object {
         val DEFAULT = AppSettings(
-            tenant = "default",
-            baseUrl = "https://lms-backenddev.racinesolutions.com/",
+            tenant = "",
+            baseUrl = "https://payments.racinesolutions.com/",
             appTheme = DarkThemeConfig.FOLLOW_SYSTEM,
             language = LanguageConfig.DEFAULT,
         )
