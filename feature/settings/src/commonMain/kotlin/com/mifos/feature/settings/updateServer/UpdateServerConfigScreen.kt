@@ -314,6 +314,7 @@ internal fun UpdateServerConfigScreenContent(
                     value = serverConfig.protocol,
                     placeholder = stringResource(Res.string.feature_settings_protocol_placeholder),
                     leadingIcon = MifosIcons.AddLink,
+                    enabled = false,
                     errorText = protocolError,
                     keyboardType = KeyboardType.Uri,
                     errorTextTag = serverConfig.protocol,
@@ -350,6 +351,7 @@ internal fun UpdateServerConfigScreenContent(
                     value = serverConfig.endPoint,
                     label = "",
                     leadingIcon = MifosIcons.Link,
+                    enabled = false,
                     isError = endPointError != null,
                     errorText = endPointError,
                     placeholder = stringResource(Res.string.feature_settings_hostname_placeholder),
@@ -383,6 +385,7 @@ internal fun UpdateServerConfigScreenContent(
                 MifosOutlinedTextField(
                     value = serverConfig.apiPath,
                     leadingIcon = MifosIcons.Link,
+                    enabled = false,
                     isError = apiPathError != null,
                     errorText = apiPathError,
                     keyboardType = KeyboardType.Uri,
@@ -418,6 +421,7 @@ internal fun UpdateServerConfigScreenContent(
                 MifosOutlinedTextField(
                     value = serverConfig.port,
                     leadingIcon = MifosIcons.Link,
+                    enabled = false,
                     isError = portError != null,
                     errorText = portError,
                     keyboardType = KeyboardType.Number,
